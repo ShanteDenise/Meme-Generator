@@ -29,11 +29,28 @@ const initialState = {
 
 
 
+
  class Images extends React.Component {
     state = {
         currentImage: 0,
         modalIsOpen: false,
+        toptext: "",
+        bottomtext: "",
+        isTopDragging: false,
+        isBottomDragging: false,
+        topY: "10%",
+        topX: "50%",
+        bottomX: "50%",
+        bottomY: "90%"
     };
+
+    changeText = (event) => {
+        this.setState({
+          [event.currentTarget.name]: event.currentTarget.value
+        });
+        console.log(event.currentTarget.value)
+      }
+
 
     openImage (index){
         console.log(photos[index].src)
@@ -58,6 +75,14 @@ const initialState = {
              <img alt="meme" src={this.state.currentImage}
              height="100%"
              width="100%" />
+             <div className="meme-form">
+              <FormGroup>
+                <Label for="toptext">Top Text</Label>
+                <input className="form-control" type="text" name="toptext" id="toptext" placeholder="Add text to the top" onChange={this.changeText} />
+              </FormGroup>
+              </div>
+
+            
           </ModalBody>
           </Modal>
           
