@@ -13,6 +13,7 @@ const photos = [
 
 ]
 
+
 const initialState = {
     toptext: "",
     bottomtest: "",
@@ -23,22 +24,49 @@ const initialState = {
     bottomX: "50%",
     bottomY: "90%"
 }
- function openImage (index){
-     console.log(photos[index])
- }
+
+
+
 
 
  class Images extends React.Component {
-         state = {
-             currentImage: 0,
-             modalIsOpen: false,
-             ...initialState
-         };
-     
+    state = {
+        currentImage: 0,
+        modalIsOpen: false,
+    };
+
+  
+    openImage (index){
+        console.log(photos[index])
+        
+        this.setState({
+            currentImage: index,
+            modalIsOpen: true,
+            
+           
+        })
+        console.log(this.state)
+        
+    }
+    
+   
+    
+
   render() {
     return (
       <div>
-          <div className="content"></div>
+          <div className="content">
+          <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen}>
+          <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
+          <ModalBody>
+             
+          </ModalBody>
+          </Modal>
+          
+          
+          
+        
+          
           {photos.map((image, index) => (
           <div className="image" key={image.src}>
             <span className="topCaption">Top text</span>
@@ -49,11 +77,12 @@ const initialState = {
               }}
               alt={index}
               src={image.src}
-              onClick={() => openImage(index) /* The onclick here determines current image */}
+              onClick={() => this.openImage(index) /* The onclick here determines current image */}
             />
             <span className="bottomCaption">Bottom text</span>
           </div>
         ))}
+      </div>
       </div>
     )
   }
