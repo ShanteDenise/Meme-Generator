@@ -2,8 +2,8 @@ import React from 'react'
 import {Modal, ModalHeader, ModalBody, FormGroup, Label, NavbarBrand} from 'reactstrap';
 
 const photos = [
-    { src: 'img/crying-face-dawson.jpg'},
-    { src: 'img/First-World-Problems.jpg'},
+    {src: 'img/crying-face-dawson.jpg'},
+    {src: 'img/First-World-Problems.jpg'},
     {src: 'img/mad-arthur.jpg'},
     {src: 'img/side-eye-chloe.jpg'},
     {src: 'img/Successful_kid_meme.png'},
@@ -35,22 +35,18 @@ const initialState = {
         modalIsOpen: false,
     };
 
-  
     openImage (index){
-        console.log(photos[index])
+        console.log(photos[index].src)
         
         this.setState({
-            currentImage: index,
+            currentImage: photos[index].src,
             modalIsOpen: true,
             
            
         })
         console.log(this.state)
         
-    }
-    
-   
-    
+    } 
 
   render() {
     return (
@@ -59,7 +55,9 @@ const initialState = {
           <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen}>
           <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
           <ModalBody>
-             
+             <img alt="meme" src={this.state.currentImage}
+             height="100%"
+             width="100%" />
           </ModalBody>
           </Modal>
           
