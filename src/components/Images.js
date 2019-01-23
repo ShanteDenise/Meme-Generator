@@ -23,6 +23,10 @@ const initialState = {
     bottomX: "50%",
     bottomY: "90%"
 }
+ function openImage (index){
+     console.log(photos[index])
+ }
+
 
  class Images extends React.Component {
          state = {
@@ -45,7 +49,7 @@ const initialState = {
               }}
               alt={index}
               src={image.src}
-              onClick={() => this.openImage(index) /* The onclick here determines current image */}
+              onClick={() => openImage(index) /* The onclick here determines current image */}
             />
             <span className="bottomCaption">Bottom text</span>
           </div>
