@@ -32,7 +32,7 @@ const initialState = {
 
  class Images extends React.Component {
     state = {
-        currentImage: 0,
+        currentImage: "",
         modalIsOpen: false,
         toptext: "",
         bottomtext: "",
@@ -48,7 +48,6 @@ const initialState = {
         this.setState({
           [event.currentTarget.name]: event.currentTarget.value
         });
-        console.log(event.currentTarget.value)
       }
 
 
@@ -75,10 +74,24 @@ const initialState = {
              <img alt="meme" src={this.state.currentImage}
              height="100%"
              width="100%" />
+             <p
+                x={this.state.topX}
+                y={this.state.topY}
+                onMouseDown={event => this.handleMouseDown(event, 'top')}
+                onMouseUp={event => this.handleMouseUp(event, 'top')}
+                >
+                 {this.state.toptext}
+                </p>
+               
+                
              <div className="meme-form">
               <FormGroup>
                 <Label for="toptext">Top Text</Label>
                 <input className="form-control" type="text" name="toptext" id="toptext" placeholder="Add text to the top" onChange={this.changeText} />
+              </FormGroup>
+              <FormGroup>
+                <Label for="bottomtext">Bottom Text</Label>
+                <input className="form-control" type="text" name="bottomtext" id="bottomtext" placeholder="Add text to the bottom" onChange={this.changeText} />
               </FormGroup>
               </div>
 
