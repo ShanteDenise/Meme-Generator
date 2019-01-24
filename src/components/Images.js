@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, ModalHeader, ModalBody, FormGroup, Label, NavbarBrand} from 'reactstrap';
+import {Modal, ModalHeader, ModalBody, FormGroup, Label, NavbarBrand, Button} from 'reactstrap';
 
 const photos = [
     {src: 'img/crying-face-dawson.jpg'},
@@ -9,7 +9,7 @@ const photos = [
     {src: 'img/Successful_kid_meme.png'},
     {src: 'img/Think-About-It.jpg'},
     {src: 'img/Unimpressed_kid.jpg'},
-    {src: 'img/Everywhere-ToyStory'}
+    {src: 'img/Everywhere-ToyStory.jpg'}
 
 ]
 
@@ -58,8 +58,29 @@ const photos = [
 
   render() {
     return (
-      <div>
+      <div className="main-content">
+
+          {/* <div className="sidebar">
+          <NavbarBrand href="/">Meme-Maker</NavbarBrand>
+          </div> */}
           <div className="content">
+          {photos.map((image, index) => (
+          <div className="image" key={image.src}>
+            <span className="top-text caption">Top text</span>
+            <img
+              style={{
+                width: "100%",
+                height: "100%",
+                cursor: "pointer"
+              }}
+              alt={index}
+              src={image.src}
+              onClick={() => this.openImage(index) /* Determines current image */}
+            />
+            <span className="bottom-text caption">Bottom text</span>
+          </div>
+        ))}</div>
+          
           <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen}>
           <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
           
@@ -69,6 +90,8 @@ const photos = [
              width="100%" 
              role="presentation"/>
              <p className="toptext"
+                dominatbaseline="middle"
+                textAnchor="middle"
                 x={this.state.topX}
                 y={this.state.topY}
                 onMouseDown={event => this.handleMouseDown(event, 'top')}
@@ -96,6 +119,7 @@ const photos = [
                 <Label for="bottomtext">Bottom Text</Label>
                 <input className="form-control" type="text" name="bottomtext" id="bottomtext" placeholder="Add text to the bottom" onChange={this.changeText} />
               </FormGroup>
+              <a href={this.state.currentImage} download><Button color="success">Download</Button></a>
               </div>
 
             
@@ -103,26 +127,9 @@ const photos = [
           </Modal>
           
           
-          
         
-          
-          {photos.map((image, index) => (
-          <div className="image" key={image.src}>
-            <span className="topCaption">Top text</span>
-            <img
-              style={{
-                width: "100%",
-                height: "100%"
-              }}
-              alt={index}
-              src={image.src}
-              onClick={() => this.openImage(index) /* The onclick here determines current image */}
-            />
-            <span className="bottomCaption">Bottom text</span>
-          </div>
-        ))}
       </div>
-      </div>
+    
     )
   }
 }
