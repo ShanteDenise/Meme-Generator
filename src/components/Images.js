@@ -14,20 +14,6 @@ const photos = [
 ]
 
 
-const initialState = {
-    toptext: "",
-    bottomtest: "",
-    isTopDragging: false,
-    isBottomDragging: false,
-    topY: "10%",
-    topX: "50%",
-    bottomX: "50%",
-    bottomY: "90%"
-}
-
-
-
-
 
 
  class Images extends React.Component {
@@ -40,9 +26,10 @@ const initialState = {
         isBottomDragging: false,
         topY: "10%",
         topX: "50%",
-        bottomX: "50%",
-        bottomY: "90%"
+        bottomX: "0%",
+        bottomY: "90%",
     };
+   
 
     changeText = (event) => {
         this.setState({
@@ -51,18 +38,23 @@ const initialState = {
       }
 
 
-    openImage (index){
-        console.log(photos[index].src)
-        
+    openImage (index){        
         this.setState({
             currentImage: photos[index].src,
-            modalIsOpen: true,
-            
-           
+            modalIsOpen: true,       
         })
-        console.log(this.state)
+    }
+
+
+    toggle = () => {
+        this.setState(prevState => ({
+            modalIsOpen: !prevState.modalIsOpen
+        }))
+    }
+
         
-    } 
+        
+  
 
   render() {
     return (
@@ -70,18 +62,29 @@ const initialState = {
           <div className="content">
           <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen}>
           <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
+          
           <ModalBody>
              <img alt="meme" src={this.state.currentImage}
              height="100%"
-             width="100%" />
-             <p
+             width="100%" 
+             role="presentation"/>
+             <p className="toptext"
                 x={this.state.topX}
                 y={this.state.topY}
                 onMouseDown={event => this.handleMouseDown(event, 'top')}
                 onMouseUp={event => this.handleMouseUp(event, 'top')}
                 >
                  {this.state.toptext}
-                </p>
+            </p>
+
+            <p className="bottomtext"
+                x={this.state.bottomX}
+                y={this.state.bottomY}
+                onMouseDown={event => this.handleMouseDown(event, 'bottom')}
+                onMouseUp={event => this.handleMouseUp(event, 'bottom')}
+                >
+                 {this.state.bottomtext}
+            </p>
                
                 
              <div className="meme-form">
