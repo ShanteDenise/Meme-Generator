@@ -6,6 +6,7 @@
 .header-image{
   height:200px;
   background: url('backgroundimg/funny.gif')center fixed;
+  background-size: no-repeat;
   color: #7d2ae8;
 }
 
