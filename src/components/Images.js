@@ -1,5 +1,5 @@
 import React from 'react'
-import {Modal, ModalHeader, ModalBody, FormGroup, Label, NavbarBrand, Button} from 'reactstrap';
+import {Modal, ModalHeader, ModalBody, FormGroup, Label, Button} from 'reactstrap';
 
 const photos = [
     {src: 'img/crying-face-dawson.jpg'},
@@ -57,11 +57,8 @@ const MAX_LENGTH = 30
 
   render() {
     return (
-      <div className="main-content">
 
-          {/* <div className="sidebar">
-          <NavbarBrand href="/">Meme-Maker</NavbarBrand>
-          </div> */}
+      <div className="main-content">
           <div className="content">
           {photos.map((image, index) => (
           <div className="image" key={image.src}>
@@ -130,6 +127,7 @@ const MAX_LENGTH = 30
       </div>
     
     )
+
   }
 }
  export default Images;
