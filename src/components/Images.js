@@ -71,7 +71,7 @@ const MAX_LENGTH = 30
           <div className="content">
           {photos.map((image, index) => (
           <div className="image" key={image.src}>
-            <span className="top-text caption">Top text</span>
+            {/* <span className="top-text caption">Top text</span> */}
             <img
               style={{
                 width: "100%",
@@ -82,7 +82,7 @@ const MAX_LENGTH = 30
               src={image.src}
               onClick={() => this.openImage(index) /* Determines current image */}
             />
-            <span className="bottom-text caption">Bottom text</span>
+            {/* <span className="bottom-text caption">Bottom text</span> */}
           </div>
         ))}</div>
           

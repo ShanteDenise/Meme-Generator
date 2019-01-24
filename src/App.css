@@ -1,17 +1,26 @@
 
+.body{
+  background-color: #1d1c1c;
+
+}
+
 .main-content {
   display: flex;
+  overflow: scroll;
+  height: 100%;
+ 
 }
 .content {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
 }
 .navbar {
   width:100%;
   height:3%;
-  background: #3896bb;
+  background:linear-gradient(90deg,#00c4cc,#7d2ae8);
+  color:white;
   padding: 20px;
+  font-weight: 800;
 }
 
 .toptext{
@@ -67,9 +76,10 @@
   background: linear-gradient(to left, rgb(51, 51, 51), rgba(51, 51, 51, 0.81));
 }
 .image {
-  width: 170px;
-  height: 200px;
-  position: relative;
+  margin: 0 auto;
+  width: 25%;
+  height: 25%;
+  border: solid 1px#7d2ae8;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.1);
 }
 
