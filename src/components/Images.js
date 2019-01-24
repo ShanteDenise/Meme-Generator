@@ -9,9 +9,18 @@ const photos = [
     {src: 'img/Successful_kid_meme.png'},
     {src: 'img/Think-About-It.jpg'},
     {src: 'img/Unimpressed_kid.jpg'},
-    {src: 'img/Everywhere-ToyStory.jpg'}
+    {src: 'img/Everywhere-ToyStory.jpg'},
+    {src: 'img/Am-I-The-Only-One-Around-Here.jpg'},
+    {src: 'img/grandma-computer.png'},
+    {src: 'img/Is-This-A-Pigeon.jpg'},
+    {src: 'img/skeleton_bench.jpg'},
+    {src: 'img/Yo-Dawg-Heard-You.jpg'},
+    {src: 'img/spongebob.jpg'},
+    {src: 'img/Face-You-Make.jpg'},
+    {src: 'img/kevin_hart.jpeg'}
 
 ]
+
 const MAX_LENGTH = 30
 
 
