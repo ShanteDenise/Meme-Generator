@@ -18,16 +18,18 @@
 
 .toptext{
   position: absolute;
+  top: 0;
+  /* margin: 0 auto; */
   text-align: center;
   color:white;
   font-family: Impact;
   font-size: 2rem;
-  transform: translateY(-13rem);
+  /* transform: translateY(-13rem); */
   z-index: 10;
   text-shadow: 0.6px 0 0 rgb(2, 2, 2);
   text-transform: uppercase
-
 }
+
 .bottomtext{
   position: absolute;
   text-align: center;
@@ -79,12 +81,34 @@
 .modal-body {
   border-radius: 0px;
   border: 1px none #000000;
+  background-color: #333333;
   background-color: rgba( 246, 245, 243, 1.00 );
+
 }
 .meme-form {
   margin-left: 3%;
   padding-left: 20px;
   width: 50%;
+  background-color: #333333b9;
   background-color: rgba( 246, 245, 243, 1.00 );
 
+
+}
+.modal-header {
+  background-color: rgba( 246, 245, 243, 1.00 );
+}
+
+input[type="text"] {
+  border: 0;
+  width: 150%;
+  padding-bottom: 4px;
+  font-weight: lighter;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  font-size: 20px;
+}
+
+Label {
+  padding-top: 5%;
+  text-align: center;
 }

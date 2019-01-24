@@ -12,8 +12,7 @@ const photos = [
     {src: 'img/Everywhere-ToyStory.jpg'}
 
 ]
-
-
+const MAX_LENGTH = 30
 
 
  class Images extends React.Component {
@@ -97,7 +96,7 @@ const photos = [
                 onMouseDown={event => this.handleMouseDown(event, 'top')}
                 onMouseUp={event => this.handleMouseUp(event, 'top')}
                 >
-                 {this.state.toptext}
+                { `${this.state.toptext.substring(0, MAX_LENGTH)}`}
             </p>
 
             <p className="bottomtext"
@@ -119,7 +118,7 @@ const photos = [
                 <Label for="bottomtext">Bottom Text</Label>
                 <input className="form-control" type="text" name="bottomtext" id="bottomtext" placeholder="Add text to the bottom" onChange={this.changeText} />
               </FormGroup>
-              <a href={this.state.currentImage} download><Button color="success">Download</Button></a>
+              <a href={this.state.currentImage} download><Button color="info">Download</Button></a>
               </div>
 
             
