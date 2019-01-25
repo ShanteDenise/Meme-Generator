@@ -1,25 +1,29 @@
 import React from 'react'
 import {Modal, ModalHeader, ModalBody, FormGroup, Label, Button} from 'reactstrap';
 
-const photos = [
-    {src: 'img/crying-face-dawson.jpg'},
-    {src: 'img/First-World-Problems.jpg'},
-    {src: 'img/mad-arthur.jpg'},
-    {src: 'img/side-eye-chloe.jpg'},
-    {src: 'img/Successful_kid_meme.png'},
-    {src: 'img/Think-About-It.jpg'},
-    {src: 'img/Unimpressed_kid.jpg'},
-    {src: 'img/Everywhere-ToyStory.jpg'},
-    {src: 'img/Am-I-The-Only-One-Around-Here.jpg'},
-    {src: 'img/grandma-computer.png'},
-    {src: 'img/Is-This-A-Pigeon.jpg'},
-    {src: 'img/skeleton_bench.jpg'},
-    {src: 'img/Yo-Dawg-Heard-You.jpg'},
-    {src: 'img/spongebob.jpg'},
-    {src: 'img/Face-You-Make.jpg'},
-    {src: 'img/kevin_hart.jpeg'}
+// const photos = [
+//     {src: 'img/crying-face-dawson.jpg'},
+//     {src: 'img/First-World-Problems.jpg'},
+//     {src: 'img/mad-arthur.jpg'},
+//     {src: 'img/side-eye-chloe.jpg'},
+//     {src: 'img/Successful_kid_meme.png'},
+//     {src: 'img/Think-About-It.jpg'},
+//     {src: 'img/Unimpressed_kid.jpg'},
+//     {src: 'img/Everywhere-ToyStory.jpg'},
+//     {src: 'img/Am-I-The-Only-One-Around-Here.jpg'},
+//     {src: 'img/grandma-computer.png'},
+//     {src: 'img/Is-This-A-Pigeon.jpg'},
+//     {src: 'img/skeleton_bench.jpg'},
+//     {src: 'img/Yo-Dawg-Heard-You.jpg'},
+//     {src: 'img/spongebob.jpg'},
+//     {src: 'img/Face-You-Make.jpg'},
+//     {src: 'img/kevin_hart.jpeg'}
 
-]
+// ]
+
+
+
+
 
 const MAX_LENGTH = 30
 
@@ -28,6 +32,7 @@ const MAX_LENGTH = 30
     state = {
         currentImage: "",
         modalIsOpen: false,
+        photos: [],
         toptext: "",
         bottomtext: "",
         isTopDragging: false,
@@ -37,6 +42,17 @@ const MAX_LENGTH = 30
         bottomX: "0%",
         bottomY: "90%",
     };
+
+    componentDidMount(){
+      this.getMeme()
+    }
+    getMeme = async() => {
+      const api_call = await fetch('https://api.imgflip.com/get_memes')
+      const data = await api_call.json();
+        this.setState({
+          photos: data.data.memes
+        })
+    }
    
 
     changeText = (event) => {
@@ -46,9 +62,10 @@ const MAX_LENGTH = 30
       }
 
 
-    openImage (index){        
+    openImage (url){ 
+      console.log(url)       
         this.setState({
-            currentImage: photos[index].src,
+            currentImage: url,
             modalIsOpen: true,       
         })
     }
@@ -69,18 +86,17 @@ const MAX_LENGTH = 30
 
       <div className="main-content">
           <div className="content">
-          {photos.map((image, index) => (
-          <div className="image" key={image.src}>
+          {this.state.photos.map((image, index) => (
+          <div className="image" key={image.url}>
             {/* <span className="top-text caption">Top text</span> */}
             <img
               style={{
-                width: "100%",
-                height: "100%",
+                width: "100px",
                 cursor: "pointer"
               }}
               alt={index}
-              src={image.src}
-              onClick={() => this.openImage(index) /* Determines current image */}
+              src={image.url}
+              onClick={() => this.openImage(image.url) /* Determines current image */}
             />
             {/* <span className="bottom-text caption">Bottom text</span> */}
           </div>
