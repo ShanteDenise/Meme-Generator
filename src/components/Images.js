@@ -2,22 +2,22 @@ import React from 'react'
 import {Modal, ModalHeader, ModalBody, FormGroup, Label, Button} from 'reactstrap';
 
 // const photos = [
-//     {src: 'img/crying-face-dawson.jpg'},
-//     {src: 'img/First-World-Problems.jpg'},
-//     {src: 'img/mad-arthur.jpg'},
-//     {src: 'img/side-eye-chloe.jpg'},
-//     {src: 'img/Successful_kid_meme.png'},
-//     {src: 'img/Think-About-It.jpg'},
-//     {src: 'img/Unimpressed_kid.jpg'},
-//     {src: 'img/Everywhere-ToyStory.jpg'},
-//     {src: 'img/Am-I-The-Only-One-Around-Here.jpg'},
-//     {src: 'img/grandma-computer.png'},
-//     {src: 'img/Is-This-A-Pigeon.jpg'},
-//     {src: 'img/skeleton_bench.jpg'},
-//     {src: 'img/Yo-Dawg-Heard-You.jpg'},
-//     {src: 'img/spongebob.jpg'},
-//     {src: 'img/Face-You-Make.jpg'},
-//     {src: 'img/kevin_hart.jpeg'}
+    // {src: 'img/crying-face-dawson.jpg'},
+    // {src: 'img/First-World-Problems.jpg'},
+    // {src: 'img/mad-arthur.jpg'},
+    // {src: 'img/side-eye-chloe.jpg'},
+    // {src: 'img/Successful_kid_meme.png'},
+    // {src: 'img/Think-About-It.jpg'},
+    // {src: 'img/Unimpressed_kid.jpg'},
+    // {src: 'img/Everywhere-ToyStory.jpg'},
+    // {src: 'img/Am-I-The-Only-One-Around-Here.jpg'},
+    // {src: 'img/grandma-computer.png'},
+    // {src: 'img/Is-This-A-Pigeon.jpg'},
+    // {src: 'img/skeleton_bench.jpg'},
+    // {src: 'img/Yo-Dawg-Heard-You.jpg'},
+    // {src: 'img/spongebob.jpg'},
+    // {src: 'img/Face-You-Make.jpg'},
+    // {src: 'img/kevin_hart.jpeg'}
 
 // ]
 
@@ -32,7 +32,25 @@ const MAX_LENGTH = 30
     state = {
         currentImage: "",
         modalIsOpen: false,
-        photos: [],
+        photos: [
+          {url: 'img/crying-face-dawson.jpg'},
+          {url: 'img/First-World-Problems.jpg'},
+          {url: 'img/mad-arthur.jpg'},
+          {url: 'img/side-eye-chloe.jpg'},
+          {url: 'img/Successful_kid_meme.png'},
+          {url: 'img/Think-About-It.jpg'},
+          {url: 'img/Unimpressed_kid.jpg'},
+          {url: 'img/Everywhere-ToyStory.jpg'},
+          {url: 'img/Am-I-The-Only-One-Around-Here.jpg'},
+          {url: 'img/grandma-computer.png'},
+          {url: 'img/Is-This-A-Pigeon.jpg'},
+          {url: 'img/skeleton_bench.jpg'},
+          {url: 'img/Yo-Dawg-Heard-You.jpg'},
+          {url: 'img/spongebob.jpg'},
+          {url: 'img/Face-You-Make.jpg'},
+          {url: 'img/kevin_hart.jpeg'}
+        ],
+        currentImagebase64: null,
         toptext: "",
         bottomtext: "",
         isTopDragging: false,
@@ -43,16 +61,16 @@ const MAX_LENGTH = 30
         bottomY: "90%",
     };
 
-    componentDidMount(){
-      this.getMeme()
-    }
-    getMeme = async() => {
-      const api_call = await fetch('https://api.imgflip.com/get_memes')
-      const data = await api_call.json();
-        this.setState({
-          photos: data.data.memes
-        })
-    }
+    // componentDidMount(){
+    //   this.getMeme()
+    // }
+    // getMeme = async() => {
+    //   const api_call = await fetch('https://api.imgflip.com/get_memes')
+    //   const data = await api_call.json();
+    //     this.setState({
+    //       photos: data.data.memes
+    //     })
+    // }
    
 
     changeText = (event) => {
@@ -63,8 +81,12 @@ const MAX_LENGTH = 30
 
 
     openImage (url){ 
-      console.log(url)       
+      const base_image = new Image();
+      console.log(base_image)     
+      base_image.src = url;
+      const currentImagebase64 = this.getBase64Image(base_image);  
         this.setState({
+            currentImagebase64: currentImagebase64,
             currentImage: url,
             modalIsOpen: true,       
         })
@@ -75,6 +97,41 @@ const MAX_LENGTH = 30
         this.setState(prevState => ({
             modalIsOpen: !prevState.modalIsOpen
         }))
+    }
+
+    convertSvgToImage = () => {
+      const svg = this.svgRef;
+      console.log(svg)
+      let svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement("canvas");
+      canvas.setAttribute("id", "canvas");
+      const svgSize = svg.getBoundingClientRect();
+      canvas.width = svgSize.width;
+      canvas.height = svgSize.height;
+      const img = document.createElement("img");
+      img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
+      img.onload = function() {
+        canvas.getContext("2d").drawImage(img, 0, 0);
+        const canvasdata = canvas.toDataURL("image/png");
+        const a = document.createElement("a");
+        a.download = "meme.png";
+        a.href = canvasdata;
+        document.body.appendChild(a);
+        a.click();
+      };
+    }
+
+    getBase64Image(img) {
+      // This function converts image to data URI
+      var canvas = document.createElement("canvas");
+      img.crossOrigin = "Anonymous";
+      canvas.width = '600';
+      canvas.height = '600';
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
+      var dataURL = canvas.toDataURL("image/png");
+      return dataURL;
     }
 
         
@@ -106,11 +163,26 @@ const MAX_LENGTH = 30
           <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
           
           <ModalBody>
-             <img alt="meme" src={this.state.currentImage}
+          <svg
+               height='600px'
+               ref={el => { this.svgRef = el }}
+               id="svg_ref"
+               width='600px'
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlnshlink="http://www.w3.org/1999/xlink">
+              <image
+                ref={el => { this.imageRef = el }}
+                xlinkHref={this.state.currentImagebase64}
+                height="100%"
+                width="100%" 
+              /> 
+  
+
+          {/* <img crossOrigin="Anonymous" alt="meme" src={this.state.currentImagebase64}
              height="100%"
              width="100%" 
-             role="presentation"/>
-             <p className="toptext"
+             role="presentation"/> */}
+             <text className="toptext"
                 dominatbaseline="middle"
                 textAnchor="middle"
                 x={this.state.topX}
@@ -119,16 +191,17 @@ const MAX_LENGTH = 30
                 onMouseUp={event => this.handleMouseUp(event, 'top')}
                 >
                 { `${this.state.toptext.substring(0, MAX_LENGTH)}`}
-            </p>
+            </text>
 
-            <p className="bottomtext"
+            <text className="bottomtext"
                 x={this.state.bottomX}
                 y={this.state.bottomY}
                 onMouseDown={event => this.handleMouseDown(event, 'bottom')}
                 onMouseUp={event => this.handleMouseUp(event, 'bottom')}
                 >
                  {this.state.bottomtext}
-            </p>
+            </text>
+         </svg>
                
                 
              <div className="meme-form">
@@ -140,7 +213,7 @@ const MAX_LENGTH = 30
                 <Label for="bottomtext">Bottom Text</Label>
                 <input className="form-control" type="text" name="bottomtext" id="bottomtext" placeholder="Add text to the bottom" onChange={this.changeText} />
               </FormGroup>
-              <a href={this.state.currentImage} download><Button color="info">Download</Button></a>
+              <Button onClick={() => this.convertSvgToImage()} className="btn btn-primary">Download Meme!</Button>
               </div>
 
             

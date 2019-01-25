@@ -12,6 +12,7 @@ class App extends Component {
       <Navbar/>
       <HeaderImage/>
       <Images/>
+
       </div>
     );
   }
