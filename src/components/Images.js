@@ -3,7 +3,6 @@ import {Modal, ModalHeader, Carousel, ModalBody, FormGroup, Label, Button} from 
 
 const MAX_LENGTH = 30
 
-
  class Images extends React.Component {
     state = {
         currentImage: "",
@@ -34,7 +33,7 @@ const MAX_LENGTH = 30
         isBottomDragging: false,
         topY: "10%",
         topX: "50%",
-        bottomX: "0%",
+        bottomX: "50%",
         bottomY: "90%",
     };
 
@@ -58,12 +57,12 @@ const MAX_LENGTH = 30
 
 
     openImage (url){ 
+      // const image = photos[url]
       const base_image = new Image();
-      console.log(base_image)     
       base_image.src = url;
-      const currentImagebase64 = this.getBase64Image(base_image);  
+      const base64 = this.getBase64Image(base_image);  
         this.setState({
-            currentImagebase64: currentImagebase64,
+            currentImagebase64: base64,
             currentImage: url,
             modalIsOpen: true,       
         })
@@ -72,13 +71,15 @@ const MAX_LENGTH = 30
 
     toggle = () => {
         this.setState(prevState => ({
-            modalIsOpen: !prevState.modalIsOpen
+            modalIsOpen: !prevState.modalIsOpen,
+            toptext: "",
+            bottomtext: "",
+
         }))
     }
 
     convertSvgToImage = () => {
       const svg = this.svgRef;
-      console.log(svg)
       let svgData = new XMLSerializer().serializeToString(svg);
       const canvas = document.createElement("canvas");
       canvas.setAttribute("id", "canvas");
@@ -101,9 +102,8 @@ const MAX_LENGTH = 30
     getBase64Image(img) {
       // This function converts image to data URI
       var canvas = document.createElement("canvas");
-      img.crossOrigin = "Anonymous";
-      canvas.width = '600';
-      canvas.height = '600';
+      canvas.width = img.width;
+      canvas.height = img.height;
       var ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0);
       // https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL
@@ -111,8 +111,14 @@ const MAX_LENGTH = 30
       return dataURL;
     }
 
-
   render() {
+    const url = this.state.currentImage;
+    const base_image = new Image();
+    base_image.src = url;
+    base_image.src = url;
+    var wrh = base_image.width / base_image.height;
+    var newWidth = 600;
+    var newHeight = newWidth / wrh;
     return (
 
       <div className="main-content">
@@ -120,15 +126,6 @@ const MAX_LENGTH = 30
           {this.state.photos.map((image, index) => (
           <div className="image" key={image.url}>
             <span className="top-text caption">Top text</span>
-            {/* <Carousel>
-  <Carousel.Item>
-    <img width={900} height={500} alt="900x500" src={image.url} />
-    <Carousel.Caption>
-      <h3>First slide label</h3>
-      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-    </Carousel.Caption>
-  </Carousel.Item>
-  </Carousel> */}
             <img
               alt={index}
               src={image.url}
@@ -139,21 +136,20 @@ const MAX_LENGTH = 30
         ))}</div>
           
           <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen}>
-          <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
-          
+          <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>        
           <ModalBody>
           <svg
-               height='600px'
+               width={newWidth}
+               height={newHeight}
                ref={el => { this.svgRef = el }}
                id="svg_ref"
-               width='600px'
                   xmlns="http://www.w3.org/2000/svg"
                   xmlnshlink="http://www.w3.org/1999/xlink">
               <image
                 ref={el => { this.imageRef = el }}
                 xlinkHref={this.state.currentImagebase64}
-                height="100%"
-                width="100%" 
+                height={newHeight}
+                width={newWidth}
               /> 
 
              <text className="toptext"
@@ -175,9 +171,7 @@ const MAX_LENGTH = 30
                 >
                  {this.state.bottomtext}
             </text>
-         </svg>
-               
-                
+         </svg>    
              <div className="meme-form">
               <FormGroup>
                 <Label for="toptext">Top Text</Label>
@@ -189,13 +183,9 @@ const MAX_LENGTH = 30
               </FormGroup>
               <Button onClick={() => this.convertSvgToImage()} className="btn btn-primary">Download Meme!</Button>
               </div>
-
-            
           </ModalBody>
           </Modal>
-          
-          
-        
+
       </div>
     
     )
