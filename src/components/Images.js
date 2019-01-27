@@ -1,29 +1,5 @@
 import React from 'react'
-import {Modal, ModalHeader, ModalBody, FormGroup, Label, Button} from 'reactstrap';
-
-// const photos = [
-    // {src: 'img/crying-face-dawson.jpg'},
-    // {src: 'img/First-World-Problems.jpg'},
-    // {src: 'img/mad-arthur.jpg'},
-    // {src: 'img/side-eye-chloe.jpg'},
-    // {src: 'img/Successful_kid_meme.png'},
-    // {src: 'img/Think-About-It.jpg'},
-    // {src: 'img/Unimpressed_kid.jpg'},
-    // {src: 'img/Everywhere-ToyStory.jpg'},
-    // {src: 'img/Am-I-The-Only-One-Around-Here.jpg'},
-    // {src: 'img/grandma-computer.png'},
-    // {src: 'img/Is-This-A-Pigeon.jpg'},
-    // {src: 'img/skeleton_bench.jpg'},
-    // {src: 'img/Yo-Dawg-Heard-You.jpg'},
-    // {src: 'img/spongebob.jpg'},
-    // {src: 'img/Face-You-Make.jpg'},
-    // {src: 'img/kevin_hart.jpeg'}
-
-// ]
-
-
-
-
+import {Modal, ModalHeader, Carousel, ModalBody, FormGroup, Label, Button} from 'reactstrap';
 
 const MAX_LENGTH = 30
 
@@ -50,6 +26,7 @@ const MAX_LENGTH = 30
           {url: 'img/Face-You-Make.jpg'},
           {url: 'img/kevin_hart.jpeg'}
         ],
+        
         currentImagebase64: null,
         toptext: "",
         bottomtext: "",
@@ -134,9 +111,6 @@ const MAX_LENGTH = 30
       return dataURL;
     }
 
-        
-        
-  
 
   render() {
     return (
@@ -145,17 +119,22 @@ const MAX_LENGTH = 30
           <div className="content">
           {this.state.photos.map((image, index) => (
           <div className="image" key={image.url}>
-            {/* <span className="top-text caption">Top text</span> */}
+            <span className="top-text caption">Top text</span>
+            {/* <Carousel>
+  <Carousel.Item>
+    <img width={900} height={500} alt="900x500" src={image.url} />
+    <Carousel.Caption>
+      <h3>First slide label</h3>
+      <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+    </Carousel.Caption>
+  </Carousel.Item>
+  </Carousel> */}
             <img
-              style={{
-                width: "100px",
-                cursor: "pointer"
-              }}
               alt={index}
               src={image.url}
               onClick={() => this.openImage(image.url) /* Determines current image */}
             />
-            {/* <span className="bottom-text caption">Bottom text</span> */}
+            <span className="bottom-text caption">Bottom text</span>
           </div>
         ))}</div>
           
@@ -176,12 +155,7 @@ const MAX_LENGTH = 30
                 height="100%"
                 width="100%" 
               /> 
-  
 
-          {/* <img crossOrigin="Anonymous" alt="meme" src={this.state.currentImagebase64}
-             height="100%"
-             width="100%" 
-             role="presentation"/> */}
              <text className="toptext"
                 dominatbaseline="middle"
                 textAnchor="middle"

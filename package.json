@@ -2,7 +2,6 @@
   "name": "meme-generator",
   "version": "0.1.0",
   "private": true,
-  "proxy": "*",
   "dependencies": {
     "bootstrap": "^4.2.1",
     "react": "^16.7.0",
