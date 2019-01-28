@@ -3,7 +3,6 @@
   src: url('./backgroundimg/CREABBB_.TTF');
 }
 
-
 .header-image{
   display: flex;
   height:300px;
@@ -15,14 +14,12 @@
 }
 .troll{
   height: 370px;
-
 }
 
 .main-content {
   height: 100%;
   align-content: center;
   background-color: white;
-  /* background-color: #1b1b1b; */
 }
 
 .content{
@@ -52,11 +49,7 @@
   position: absolute;
   top: 0;
   text-align: center;
-  color:white;
-  font-family: Impact;
-  font-size: 2rem;
   z-index: 10;
-  text-shadow: 0.6px 0 0 rgb(2, 2, 2);
   text-transform: uppercase
 }
 
@@ -64,10 +57,8 @@
   position: absolute;
   text-align: center;
   color:white;
-  font-size: 2rem;
-  font-family: Impact;
+  bottom: 0;
   z-index: 10;
-  /* text-shadow: 0.6px 0 0 rgb(2, 2, 2); */
   text-transform: uppercase
 }
 
@@ -82,7 +73,6 @@
   color: #fff;
   letter-spacing: 1px;
   background: linear-gradient(to left, rgb(51, 51, 51), rgba(51, 51, 51, 0.81));
-  /* background:linear-gradient(90deg,#00c4cc,#7d2ae8); */
 }
 .top-text {
   display: block;
@@ -95,7 +85,6 @@
   color: #fff;
   letter-spacing: 1px;
   background: linear-gradient(to left, rgb(51, 51, 51), rgba(51, 51, 51, 0.81));
-  /* background:linear-gradient(90deg,#00c4cc,#7d2ae8); */
 }
 .image{
   margin: 10px;
@@ -110,7 +99,6 @@ img{
   z-index: 50;
 }
 .modal-body {
-  /* max-width: fit-content; */
   height: 100%;
   background-color: #333333;
 }
@@ -127,7 +115,6 @@ img{
 .modal-header {
   color: white;
   font-family: "creative";
-  /* background-color: rgba( 246, 245, 243, 1.00 ); */
   background:linear-gradient(90deg,#00c4cc,#7d2ae8);
 
 }
@@ -137,22 +124,23 @@ img{
 }
 input[type="text"] {
   border: 0;
-  width: 150%;
+  width: 120%;
   letter-spacing: 2px;
   margin-bottom: 30px;
   font-size: 20px;
+
 }
 
-Label {
-  text-align: center;
-}
 .meme-gen-modal{
    max-width: fit-content;
-
 }
 
 image{
   margin: 0 auto;
   height: 400px;
   width: 450px;
+}
+.btn-primary{
+  background:linear-gradient(90deg,#9200cc,#7d2ae8);
+
 }

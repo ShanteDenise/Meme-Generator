@@ -1,7 +1,7 @@
 import React from 'react'
 import {Modal, ModalHeader, Carousel, ModalBody, FormGroup, Label, Button} from 'reactstrap';
 
-const MAX_LENGTH = 30
+const MAX_LENGTH = 23
 
  class Images extends React.Component {
     state = {
@@ -23,7 +23,11 @@ const MAX_LENGTH = 30
           {url: 'img/Yo-Dawg-Heard-You.jpg'},
           {url: 'img/spongebob.jpg'},
           {url: 'img/Face-You-Make.jpg'},
-          {url: 'img/kevin_hart.jpeg'}
+          {url: 'img/kevin_hart.jpeg'},
+          {url: 'img/Girl-Wat.jpg'},
+          {url: 'img/Futurama-Fry.jpg'},
+          {url: 'img/Peter-Griffin-News.jpg'},
+          {url: 'img/Young-Cardi-B.jpg'}
         ],
         
         currentImagebase64: null,
@@ -57,7 +61,6 @@ const MAX_LENGTH = 30
 
 
     openImage (url){ 
-      // const image = photos[url]
       const base_image = new Image();
       base_image.src = url;
       const base64 = this.getBase64Image(base_image);  
@@ -116,9 +119,17 @@ const MAX_LENGTH = 30
     const base_image = new Image();
     base_image.src = url;
     base_image.src = url;
-    var wrh = base_image.width / base_image.height;
-    var newWidth = 600;
-    var newHeight = newWidth / wrh;
+    var newWidth = 450;
+    var newHeight = 400;
+    const textStyle = {
+      fontFamily: "Impact",
+      fontSize: "40px",
+      textTransform: "uppercase",
+      fill: "#FFF",
+      stroke: "#000",
+      userSelect: "none"
+    }
+
     return (
 
       <div className="main-content">
@@ -152,24 +163,23 @@ const MAX_LENGTH = 30
                 width={newWidth}
               /> 
 
-             <text className="toptext"
+             <text style={textStyle} className="toptext"
                 dominatbaseline="middle"
                 textAnchor="middle"
                 x={this.state.topX}
                 y={this.state.topY}
-                onMouseDown={event => this.handleMouseDown(event, 'top')}
-                onMouseUp={event => this.handleMouseUp(event, 'top')}
                 >
                 { `${this.state.toptext.substring(0, MAX_LENGTH)}`}
             </text>
 
-            <text className="bottomtext"
+            <text style={textStyle} className="bottomtext"
+              dominatbaseline="middle"
+              textAnchor="middle"
                 x={this.state.bottomX}
                 y={this.state.bottomY}
-                onMouseDown={event => this.handleMouseDown(event, 'bottom')}
-                onMouseUp={event => this.handleMouseUp(event, 'bottom')}
                 >
-                 {this.state.bottomtext}
+          { `${this.state.bottomtext.substring(0, MAX_LENGTH)}`}
+
             </text>
          </svg>    
              <div className="meme-form">
